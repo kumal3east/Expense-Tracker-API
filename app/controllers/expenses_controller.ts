@@ -1,5 +1,11 @@
 import Expense from '#models/expense'
-import { createValidator, readValidator, updateValidator } from '#validators/expense'
+import {
+  createValidator,
+  deleteValidator,
+  readValidator,
+  reportValidator,
+  updateValidator,
+} from '#validators/expense'
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
 
@@ -50,6 +56,42 @@ export default class ExpensesController {
       return response.status(error.status).json(error)
     }
   }
-  // async delete({ request, response, auth }: HttpContext) {}
-  // async report({ request, response, auth }: HttpContext) {}
+  async delete({ request, response, auth }: HttpContext) {
+    try {
+      const payload = await request.validateUsing(deleteValidator)
+      const expense = await Expense.query().where('id', payload.id).first()
+      if (expense!.user_id != auth.user!.id) {
+        return response.forbidden('You do not have permission to modify this data.')
+      }
+      await expense!.delete()
+      return response.ok('Deleted')
+    } catch (error) {
+      return response.status(error.status).json(error)
+    }
+  }
+  async report({ request, response, auth }: HttpContext) {
+    try {
+      const payload = await request.validateUsing(reportValidator)
+      const expenses = await Expense.query()
+        .where('user_id', auth.user!.id)
+        .whereBetween('date_of_expense', [payload.start_date, payload.end_date])
+        .select('category')
+        .groupBy('category')
+        .sum('amount')
+        .as('total')
+        .finally()
+
+      const res = expenses.map((expense) => {
+        return {
+          category: expense.category,
+          total: expense.$extras.total || expense.$extras.sum, // Ensure `total` from extras is included
+        }
+      })
+      return response.ok(res)
+    } catch (error) {
+      console.log(error)
+
+      return response.status(error.status).json(error)
+    }
+  }
 }

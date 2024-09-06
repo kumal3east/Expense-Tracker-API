@@ -42,7 +42,7 @@ export const deleteValidator = vine.compile(
   vine.object({
     id: vine.number().exists(async (db, value) => {
       const expense = await db.from('expenses').where('id', value).first()
-      return !expense
+      return expense
     }),
   })
 )
