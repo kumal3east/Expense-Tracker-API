@@ -32,7 +32,7 @@ router
       .group(() => {
         // Expense Management Routes
         router.post('/create', [ExpensesController, 'create']) // create an expense
-        router.post('/search', [ExpensesController, 'search']) // get a list of expenses
+        router.post('/read', [ExpensesController, 'read']) // get a list of expenses
         router.put('/update/', [ExpensesController, 'update']) // update an expense
         router.delete('/delete/', [ExpensesController, 'delete']) // delete an expense
 

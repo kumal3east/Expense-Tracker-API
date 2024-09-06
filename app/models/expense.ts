@@ -16,8 +16,8 @@ export default class Expense extends BaseModel {
   @column()
   declare amount: number
 
-  @column.date()
-  declare dateOfExpense: DateTime
+  @column()
+  declare date_of_expense: Date
 
   @column()
   declare category: string
