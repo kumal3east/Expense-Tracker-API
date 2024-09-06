@@ -8,14 +8,14 @@ const authConfig = defineConfig({
     web: sessionGuard({
       useRememberMeTokens: false,
       provider: sessionUserProvider({
-        model: () => import('#models/user')
+        model: () => import('#models/user'),
       }),
     }),
     jwt: jwtGuard({
       // tokenExpiresIn can be a string or a number, it can be optional
       tokenExpiresIn: '1h',
       // if you want to use cookies for the authentication instead of the bearer token (optional)
-      useCookies: true,
+      useCookies: false,
       provider: sessionUserProvider({
         model: () => import('#models/user'),
       }),
