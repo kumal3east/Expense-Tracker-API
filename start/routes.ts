@@ -33,11 +33,11 @@ router
         // Expense Management Routes
         router.post('/create', [ExpensesController, 'create']) // create an expense
         router.post('/read', [ExpensesController, 'read']) // get a list of expenses
-        router.put('/update/', [ExpensesController, 'update']) // update an expense
-        router.delete('/delete/', [ExpensesController, 'delete']) // delete an expense
+        // router.put('/update/', [ExpensesController, 'update']) // update an expense
+        // router.delete('/delete/', [ExpensesController, 'delete']) // delete an expense
 
         // Reporting Route
-        router.get('/report', [ExpensesController, 'report']) // Generate a report by category for a given date range
+        // router.get('/report', [ExpensesController, 'report']) // Generate a report by category for a given date range
       })
       .prefix('expenses')
       .use(middleware.auth())

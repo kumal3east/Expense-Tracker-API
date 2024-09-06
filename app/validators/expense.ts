@@ -4,7 +4,7 @@ export const createValidator = vine.compile(
   vine.object({
     title: vine.string().minLength(1),
     amount: vine.number().min(0.01),
-    date_of_expense: vine.date({ formats: ['DD-MM-YYYY HH:mm:ss', 'x'] }),
+    date_of_expense: vine.date({ formats: ['DD-MM-YYYY', 'x'] }),
     category: vine.string().minLength(1),
     notes: vine.string().optional(),
   })
@@ -12,8 +12,14 @@ export const createValidator = vine.compile(
 
 export const readValidator = vine.compile(
   vine.object({
-    start_date: vine.date().optional().requiredIfExists('end_date'),
-    end_date: vine.date().optional().requiredIfExists('start_date'),
+    start_date: vine
+      .date({ formats: ['DD-MM-YYYY', 'x'] })
+      .optional()
+      .requiredIfExists('end_date'),
+    end_date: vine
+      .date({ formats: ['DD-MM-YYYY', 'x'] })
+      .optional()
+      .requiredIfExists('start_date'),
     category: vine.string().optional(),
   })
 )
