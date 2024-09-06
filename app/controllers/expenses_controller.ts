@@ -1,5 +1,5 @@
 import Expense from '#models/expense'
-import { createValidator, readValidator } from '#validators/expense'
+import { createValidator, readValidator, updateValidator } from '#validators/expense'
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
 
@@ -36,7 +36,20 @@ export default class ExpensesController {
       return response.status(error.status).json(error)
     }
   }
-  // async update({ request, response, auth }: HttpContext) {}
+  async update({ request, response, auth }: HttpContext) {
+    try {
+      const payload = await request.validateUsing(updateValidator)
+      const expense = await Expense.query().where('id', payload.id).first()
+      if (expense!.user_id != auth.user!.id) {
+        return response.forbidden('You do not have permission to modify this data.')
+      }
+      expense!.merge(payload)
+      await expense!.save()
+      return response.ok(expense)
+    } catch (error) {
+      return response.status(error.status).json(error)
+    }
+  }
   // async delete({ request, response, auth }: HttpContext) {}
   // async report({ request, response, auth }: HttpContext) {}
 }

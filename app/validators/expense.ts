@@ -28,11 +28,11 @@ export const updateValidator = vine.compile(
   vine.object({
     id: vine.number().exists(async (db, value) => {
       const expense = await db.from('expenses').where('id', value).first()
-      return !expense
+      return expense
     }),
     title: vine.string().optional(),
     amount: vine.number().optional(),
-    date_of_expense: vine.date().optional(),
+    date_of_expense: vine.date({ formats: ['DD-MM-YYYY', 'x'] }).optional(),
     category: vine.string().optional(),
     notes: vine.string().optional(),
   })
@@ -49,7 +49,7 @@ export const deleteValidator = vine.compile(
 
 export const reportValidator = vine.compile(
   vine.object({
-    start_date: vine.date(),
-    end_date: vine.date(),
+    start_date: vine.date({ formats: ['DD-MM-YYYY', 'x'] }),
+    end_date: vine.date({ formats: ['DD-MM-YYYY', 'x'] }),
   })
 )
