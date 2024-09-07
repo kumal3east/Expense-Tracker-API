@@ -2,7 +2,7 @@
 # **Expense Tracker API**
 
 ## **Project Description**
-Chirawit-Test is an API for managing expenses. Users can securely store, update, delete, and view their expenses, and generate reports categorized by spending. The project features user authentication, ensuring that only authorized users can access expense management functionality.
+Expense Tracker API-Test is an API for managing expenses. Users can securely store, update, delete, and view their expenses, and generate reports categorized by spending. The project features user authentication, ensuring that only authorized users can access expense management functionality.
 
 The API is live and accessible at:  
 **[https://chirawit-test-614587273888.asia-southeast1.run.app/](https://chirawit-test-614587273888.asia-southeast1.run.app/)**
@@ -22,12 +22,12 @@ To run the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/kumal3east/chirawit-test.git
+   git clone https://github.com/kumal3east/Expense Tracker API.git
    ```
 
 2. Navigate into the project directory:
    ```bash
-   cd chirawit-test
+   cd Expense Tracker API
    ```
 
 3. Install the dependencies:
