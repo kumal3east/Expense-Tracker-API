@@ -37,7 +37,8 @@ export default class ExpensesController {
       if (payload.start_date && payload.end_date) {
         expenses.whereBetween('date_of_expense', [payload.start_date, payload.end_date])
       }
-      return response.ok(await expenses)
+      let result = await expenses.paginate(payload.page, payload.limit)
+      return response.ok(result)
     } catch (error) {
       return response.status(error.status).json(error)
     }
@@ -80,13 +81,13 @@ export default class ExpensesController {
         .sum('amount')
         .as('total')
 
-      const res = expenses.map((expense) => {
+      const result = expenses.map((expense) => {
         return {
           category: expense.category,
           total: expense.$extras.total || expense.$extras.sum,
         }
       })
-      return response.ok(res)
+      return response.ok(result)
     } catch (error) {
       return response.status(error.status).json(error)
     }

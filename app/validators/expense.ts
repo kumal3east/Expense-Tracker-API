@@ -14,6 +14,8 @@ export const createValidator = vine.compile(
 
 export const readValidator = vine.compile(
   vine.object({
+    page: vine.number().withoutDecimals().positive(),
+    limit: vine.number().withoutDecimals().positive(),
     start_date: vine
       .string()
       .regex(new RegExp('^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(\\d{4})$'))
