@@ -12,12 +12,6 @@ import UsersController from '#controllers/users_controller'
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
-
 router
   .group(() => {
     // User Management Routes
@@ -37,7 +31,7 @@ router
         router.delete('/delete/', [ExpensesController, 'delete']) // delete an expense
 
         // Reporting Route
-        router.post('/report', [ExpensesController, 'report']) // Generate a report by category for a given date range
+        router.post('/report', [ExpensesController, 'report']) // Generate a report by category
       })
       .prefix('expenses')
       .use(middleware.auth())

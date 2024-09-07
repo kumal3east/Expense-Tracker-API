@@ -9,7 +9,7 @@ export default class UsersController {
       const payload = await request.validateUsing(registerValidator)
       const user = await User.create({ email: payload.email, password_hash: payload.password })
       const token = await auth.use('jwt').generate(user)
-      return response.ok({ user, token })
+      return response.created({ user, token })
     } catch (error) {
       return response.status(error.status).json(error)
     }

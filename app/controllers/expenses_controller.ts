@@ -7,22 +7,22 @@ import {
   updateValidator,
 } from '#validators/expense'
 import type { HttpContext } from '@adonisjs/core/http'
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
 
 export default class ExpensesController {
   async create({ request, response, auth }: HttpContext) {
     try {
       const payload = await request.validateUsing(createValidator)
       const expense = await Expense.create({
-        user_id: auth.user?.id,
+        user_id: auth.user!.id,
         title: payload.title,
         amount: payload.amount,
-        date_of_expense: DateTime.fromISO(payload.date_of_expense.toISOString()).toJSDate(),
+        date_of_expense: new Date(payload.date_of_expense), //
         category: payload.category,
         notes: payload.notes,
       })
 
-      return response.ok(expense)
+      return response.created(expense)
     } catch (error) {
       return response.status(error.status).json(error)
     }
@@ -45,7 +45,7 @@ export default class ExpensesController {
   async update({ request, response, auth }: HttpContext) {
     try {
       const payload = await request.validateUsing(updateValidator)
-      const expense = await Expense.query().where('id', payload.id).first()
+      let expense = await Expense.query().where('id', payload.id).first()
       if (expense!.user_id != auth.user!.id) {
         return response.forbidden('You do not have permission to modify this data.')
       }
@@ -59,7 +59,7 @@ export default class ExpensesController {
   async delete({ request, response, auth }: HttpContext) {
     try {
       const payload = await request.validateUsing(deleteValidator)
-      const expense = await Expense.query().where('id', payload.id).first()
+      let expense = await Expense.query().where('id', payload.id).first()
       if (expense!.user_id != auth.user!.id) {
         return response.forbidden('You do not have permission to modify this data.')
       }
@@ -72,25 +72,22 @@ export default class ExpensesController {
   async report({ request, response, auth }: HttpContext) {
     try {
       const payload = await request.validateUsing(reportValidator)
-      const expenses = await Expense.query()
+      let expenses = await Expense.query()
         .where('user_id', auth.user!.id)
         .whereBetween('date_of_expense', [payload.start_date, payload.end_date])
         .select('category')
         .groupBy('category')
         .sum('amount')
         .as('total')
-        .finally()
 
       const res = expenses.map((expense) => {
         return {
           category: expense.category,
-          total: expense.$extras.total || expense.$extras.sum, // Ensure `total` from extras is included
+          total: expense.$extras.total || expense.$extras.sum,
         }
       })
       return response.ok(res)
     } catch (error) {
-      console.log(error)
-
       return response.status(error.status).json(error)
     }
   }
