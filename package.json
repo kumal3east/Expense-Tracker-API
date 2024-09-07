@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "node build/server.js",
-    "build": "node ace build",
+    "build": "npm run build",
     "heroku-postbuild": "npm run build",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
