@@ -1,5 +1,5 @@
 
-# **Chirawit-Test**
+# **Expense Tracker API**
 
 ## **Project Description**
 Chirawit-Test is an API for managing expenses. Users can securely store, update, delete, and view their expenses, and generate reports categorized by spending. The project features user authentication, ensuring that only authorized users can access expense management functionality.
