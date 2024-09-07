@@ -1,0 +1,327 @@
+{
+  "info": {
+    "_postman_id": "d51a4f00-09ad-4e12-a132-1628e1092770",
+    "name": "AbbonTest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34490211"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "",
+                  "description": "* email",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "description": "* password (at least 8 characters)",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/user/register",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "user", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "",
+                  "description": "* email",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "description": "* password",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/user/login",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "user", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Expense",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "",
+                  "description": "* title ",
+                  "type": "text"
+                },
+                {
+                  "key": "amount",
+                  "value": "",
+                  "description": "* amount",
+                  "type": "text"
+                },
+                {
+                  "key": "date_of_expense",
+                  "value": "",
+                  "description": "* date (DD-MM-YYYY)",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "* category",
+                  "type": "text"
+                },
+                {
+                  "key": "notes",
+                  "value": "",
+                  "description": "note",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/expenses/create",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "expenses", "create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "* id of expense",
+                  "type": "text"
+                },
+                {
+                  "key": "title",
+                  "value": "",
+                  "description": "title",
+                  "type": "text"
+                },
+                {
+                  "key": "amount",
+                  "value": "",
+                  "description": "amount",
+                  "type": "text"
+                },
+                {
+                  "key": "date_of_expense",
+                  "value": "",
+                  "description": "date (DD-MM-YYYY)",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "category",
+                  "type": "text"
+                },
+                {
+                  "key": "notes",
+                  "value": "",
+                  "description": "note",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/expenses/update",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "expenses", "update"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "id of expense",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/expenses/delete",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "expenses", "delete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Read",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "category",
+                  "type": "text"
+                },
+                {
+                  "key": "start_date",
+                  "value": "",
+                  "description": "date (DD-MM-YYYY)",
+                  "type": "text"
+                },
+                {
+                  "key": "end_date",
+                  "value": "",
+                  "description": "date (DD-MM-YYYY)",
+                  "type": "text"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "*page",
+                  "type": "text"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "*limit",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/expenses/read",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "expenses", "read"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Report",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "start_date",
+                  "value": "",
+                  "description": "date (DD-MM-YYYY)",
+                  "type": "text"
+                },
+                {
+                  "key": "end_date",
+                  "value": "",
+                  "description": "date (DD-MM-YYYY)",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Server}}/api/v1/expenses/report",
+              "host": ["{{Server}}"],
+              "path": ["api", "v1", "expenses", "report"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNTY3NTAyMSwiZXhwIjoxNzI1Njc4NjIxfQ.MoB39XjgAqKTsZI2ZWVASYnWusffrYWm7hfzY4XcQgU",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "Local",
+      "value": "http://localhost:3333",
+      "type": "string"
+    },
+    {
+      "key": "Server",
+      "value": "https://chirawit-test-614587273888.asia-southeast1.run.app/",
+      "type": "string"
+    }
+  ]
+}
